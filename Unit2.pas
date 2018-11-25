@@ -10,7 +10,6 @@ TAngle=class(TObject)
            XPos,YPos:integer;
            Can: TImage;
        public
-        Color: TColor;
         constructor Create(X,Y:integer; NewCanvas: TImage);
         procedure SetValue(NewValue:integer);
         function  GetValue:integer;
@@ -29,7 +28,6 @@ begin
     YPos := Y;
     Value := 45;
     Can := NewCanvas;
-    Color := clWhite;
     Self.Draw();
 end;
 
@@ -55,15 +53,15 @@ procedure TAngle.Draw;
 begin
     Self.Clear;
     Can.Canvas.Pie(XPos, YPos, Can.Width, Can.Height,
-    XPos+Trunc(Can.Width/2)+round(Trunc(Can.Width/2)*cos((Value+90)*pi/180)),
-    YPos+Trunc(Can.Height/2)+round(Trunc(Can.Height/2)*sin((Value+90)*pi/180)),
-    Trunc(Can.Width/2), Can.Height);
+    XPos+Trunc(Can.Width/2)+round(Trunc(Can.Width/2)*cos((Value)*pi/180)),
+    YPos+Trunc(Can.Height/2)+round(Trunc(Can.Height/2)*sin((Value)*pi/180)),
+    Can.Width, Trunc(Can.Height/2));
 end;
 procedure TAngle.Clear;
 begin
     Can.Canvas.Brush.Style := bsSolid;
-    Can.Canvas.pen.color:= Color;
-    Can.Canvas.brush.color:= Color;
+    Can.Canvas.pen.color:= clWhite;
+    Can.Canvas.brush.color:= clWhite;
     Can.Canvas.rectangle(XPos,YPos,Can.Width-1, Can.Height-1);
     Can.Canvas.pen.color:= clBlack;
     Can.Canvas.brush.color:=clYellow;
