@@ -98,12 +98,21 @@ object Form1: TForm1
     end
     object btnClean: TButton
       Left = 280
-      Top = 224
+      Top = 232
       Width = 75
       Height = 25
       Caption = 'Clean'
       TabOrder = 6
       OnClick = btnCleanClick
+    end
+    object btnSetColor: TButton
+      Left = 280
+      Top = 192
+      Width = 75
+      Height = 25
+      Caption = 'Set Color'
+      TabOrder = 7
+      OnClick = btnSetColorClick
     end
   end
   object pnlXY: TPanel
@@ -153,5 +162,9 @@ object Form1: TForm1
       TabOrder = 2
       OnClick = btnXYSetClick
     end
+  end
+  object dlgColor1: TColorDialog
+    Left = 656
+    Top = 200
   end
 end

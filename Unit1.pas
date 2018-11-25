@@ -25,6 +25,8 @@ type
     edtY: TEdit;
     lblY: TLabel;
     btnXYSet: TButton;
+    dlgColor1: TColorDialog;
+    btnSetColor: TButton;
     procedure edtAngleKeyPress(Sender: TObject; var Key: Char);
     procedure edtAngleIncrKeyPress(Sender: TObject; var Key: Char);
     procedure btnPlusClick(Sender: TObject);
@@ -36,6 +38,7 @@ type
     procedure edtXKeyPress(Sender: TObject; var Key: Char);
     procedure edtYKeyPress(Sender: TObject; var Key: Char);
     procedure btnXYSetClick(Sender: TObject);
+    procedure btnSetColorClick(Sender: TObject);
   private
     angl: TAngle;
     { Private declarations }
@@ -82,8 +85,10 @@ end;
 
 procedure TForm1.btnCleanClick(Sender: TObject);
 begin
-    angl.Free;
-    angl := nil;
+    angl.Clear;
+    angl.SetValue(0);
+    edtAngleIncr.Text := '0';
+    edtAngle.Text := '0';
 end;
 
 procedure TForm1.btnShowClick(Sender: TObject);
@@ -100,18 +105,25 @@ end;
 
 procedure TForm1.edtXKeyPress(Sender: TObject; var Key: Char);
 begin
-      if not (Key in [#8, '0'..'9']) then Key := #0;
+      if not (Key in [#8, '0'..'9', '-']) then Key := #0;
 end;
 
 procedure TForm1.edtYKeyPress(Sender: TObject; var Key: Char);
 begin
- if not (Key in [#8, '0'..'9']) then Key := #0;
+ if not (Key in [#8, '0'..'9', '-']) then Key := #0;
 end;
 
 procedure TForm1.btnXYSetClick(Sender: TObject);
 begin
   angl := TAngle.Create(StrToInt(edtX.Text), StrToInt(edtY.Text), imgCanvas);
   angl.Draw();
+end;
+
+procedure TForm1.btnSetColorClick(Sender: TObject);
+begin
+    if dlgColor1.Execute then
+       angl.Color := dlgColor1.Color;
+       angl.Draw;
 end;
 
 end.
