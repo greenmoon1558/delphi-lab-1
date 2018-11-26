@@ -2,7 +2,7 @@ unit Unit2;
 
 interface
 
-uses Windows, Messages, SysUtils, Variants,ExtCtrls, Windows, Graphics;
+uses Windows, Messages, SysUtils, Variants,ExtCtrls, Graphics;
 type
 TAngle=class(TPaintBox)
        private
