@@ -84,13 +84,13 @@ end;
 procedure TForm1.btnRedElipceClick(Sender: TObject);
 begin
 elipce.redBrush;
-elipce.DrawIt(405,5, 600, 200);
+elipce.DrawIt(410,5, 500, 200);
 end;
 
 procedure TForm1.btnWhiteElipceClick(Sender: TObject);
 begin
 elipce.WhiteBrush;
-elipce.DrawIt(405,205, 600, 405);
+elipce.DrawIt(410,205, 500, 405);
 end;
 
 end.
