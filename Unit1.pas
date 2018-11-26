@@ -4,34 +4,34 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, Unit2;
+  Dialogs, Unit3, Unit4, Unit5, StdCtrls, Buttons, ExtCtrls;
 
 type
   TForm1 = class(TForm)
-    pnl1: TPanel;
-    btnSet: TButton;
-    btnPlus: TButton;
-    btnMinus: TButton;
-    edtAngle: TEdit;
-    lbl1: TLabel;
-    edtAngleIncr: TEdit;
-    lbl2: TLabel;
-    btnShow: TButton;
-    btnClean: TButton;
     imgCanvas: TImage;
-    procedure edtAngleKeyPress(Sender: TObject; var Key: Char);
-    procedure edtAngleIncrKeyPress(Sender: TObject; var Key: Char);
-    procedure btnPlusClick(Sender: TObject);
-    procedure btnMinusClick(Sender: TObject);
+    pnl1: TPanel;
+    btnRedRoundRect: TBitBtn;
+    btnBlueRounRect: TBitBtn;
+    btnBlackSquare: TBitBtn;
+    btnWhiteSquare: TBitBtn;
+    btnRedElipce: TBitBtn;
+    btnWhiteElipce: TBitBtn;
+    procedure btnRedRoundRectClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btnCleanClick(Sender: TObject);
-    procedure btnShowClick(Sender: TObject);
-    procedure btnSetClick(Sender: TObject);
+    procedure btnBlueRounRectClick(Sender: TObject);
+    procedure btnBlackSquareClick(Sender: TObject);
+    procedure btnWhiteSquareClick(Sender: TObject);
+    procedure btnRedElipceClick(Sender: TObject);
+    procedure btnWhiteElipceClick(Sender: TObject);
   private
-    angl: TAngle;
     { Private declarations }
+     square: TSquare;
+     elipce: TEllipse;
+     roundRect: TRoundRect;
+     procedure btnClick(Sender: TObject; typeBtn: string);
   public
     { Public declarations }
+    
   end;
 
 var
@@ -41,55 +41,56 @@ implementation
 
 {$R *.dfm}
 
-procedure TForm1.edtAngleKeyPress(Sender: TObject; var Key: Char);
+procedure TForm1.btnRedRoundRectClick(Sender: TObject);
 begin
- if not (Key in [#8, '0'..'9']) then Key := #0;
- if (length(edtAngle.Text) = 0) then edtAngle.Text := '0';
+roundRect.redBrush;
+roundRect.DrawIt(5,5, 200, 200);
 end;
-
-procedure TForm1.edtAngleIncrKeyPress(Sender: TObject; var Key: Char);
+ procedure TForm1.btnClick(Sender: TObject; typeBtn:string);
 begin
- if not (Key in [#8, '0'..'9']) then Key := #0;
- if (length(edtAngleIncr.Text) = 0) then edtAngleIncr.Text := '0';
-end;
+  //square
+  square.DrawIt(5,5, 200, 200);
 
-procedure TForm1.btnPlusClick(Sender: TObject);
-begin
-  edtAngleIncr.Text := IntToStr(StrToInt(edtAngleIncr.Text)+1);
-  angl.SetValue(StrToInt(edtAngle.Text)+StrToInt(edtAngleIncr.Text));
+// case typeBtn of
+//    'RedRound' :
+//   Else TSquare.DrawIt(5,5, 200, 200);;
+//  end;
 end;
-
-procedure TForm1.btnMinusClick(Sender: TObject);
-begin
-edtAngleIncr.Text := IntToStr(StrToInt(edtAngleIncr.Text)-1);
-angl.SetValue(StrToInt(edtAngle.Text)+StrToInt(edtAngleIncr.Text));
-end;
-
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  angl := TAngle.Create(0, 0, imgCanvas);
-  angl.Draw();
+square := TSquare.Create(imgCanvas);
+elipce := TEllipse.Create(imgCanvas);
+roundRect := TRoundRect.Create(imgCanvas);
 end;
 
-procedure TForm1.btnCleanClick(Sender: TObject);
+procedure TForm1.btnBlueRounRectClick(Sender: TObject);
 begin
-    angl.Clear;
-    angl.SetValue(0);
-    edtAngleIncr.Text := '0';
-    edtAngle.Text := '0';
+roundRect.BlueBrush;
+roundRect.DrawIt(5, 205, 200, 405);
 end;
 
-procedure TForm1.btnShowClick(Sender: TObject);
+procedure TForm1.btnBlackSquareClick(Sender: TObject);
 begin
-  angl.SetValue(StrToInt(edtAngle.Text)+StrToInt(edtAngleIncr.Text));
-  angl.Draw();
+square.BlackBrush;
+square.DrawIt(205, 5, 405, 200);
 end;
 
-procedure TForm1.btnSetClick(Sender: TObject);
+procedure TForm1.btnWhiteSquareClick(Sender: TObject);
 begin
-  angl.SetValue(StrToInt(edtAngle.Text));
-  angl.Draw();
+square.WhiteBrush;
+square.DrawIt(205, 205, 405, 405);
 end;
 
+procedure TForm1.btnRedElipceClick(Sender: TObject);
+begin
+elipce.redBrush;
+elipce.DrawIt(405,5, 600, 200);
+end;
+
+procedure TForm1.btnWhiteElipceClick(Sender: TObject);
+begin
+elipce.WhiteBrush;
+elipce.DrawIt(405,205, 600, 405);
+end;
 
 end.
