@@ -4,7 +4,7 @@ interface
 
 uses ExtCtrls, Windows, Graphics;
 type
-TAngle=class(TObject)
+TAngle=class(TPaintBox)
        private
            Value:integer;
            XPos,YPos:integer;
@@ -23,7 +23,7 @@ implementation
 
 constructor TAngle.Create(X,Y:integer; NewCanvas:TImage);
 begin
-   inherited Create;
+   inherited Create(NewCanvas);
     XPos := X;
     YPos := Y;
     Value := 45;
